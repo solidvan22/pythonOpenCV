@@ -4,7 +4,7 @@ import os
 import random
 
 
-# Establece la cooredada x0,y0 donde ubicar la placa dentro del backgound desde la esquina superior derecha
+# Establece la cooredada x0,y0 donde ubicar la placa dentro del backgound desde la esquina superior izquierda
 
 plateCoordinatesDict={
 "fondosRuido/background1.jpg":(116,105),
@@ -19,8 +19,6 @@ def calcFontSize (texto,font,image,p):
     textHeight  = textSize[1]
     factorX     = textWidth/font.size
     factorY     = textHeight/font.size
-    print(image.size)
-    # desiredHeight= image.size[1]*p
     desiredWith  =image.size[0]*p
     fontSize = int(desiredWith/factorX)
     return fontSize
@@ -93,16 +91,15 @@ def createPlate(plateChars):
    
     x, y = imageResized.size
     imageBackgrond.paste(imageResized,(xBackground,yBackground))
-    print(x,y)
-    print(xBackground,yBackground)
     imageBackgrond.save("./result/" + plateChars + ".jpg")  
 
 
-for i in range(200):
-    print(i)
+numberOfPlates= 200
+for i in range(numberOfPlates):
+    p = int((i/numberOfPlates)*100)
     g1 = getRandomStringGroup(I(2,3)) #genera un grupo que puede tener 2 a 3 caracteres
     g2 = getRandomStringGroup(I(2,3)) #genera un grupo que puede tener 2 a 3 caracteres
     g3 = getRandomStringGroup(I(1,2)) #genera un grupo que puede tener 1 a 2 caracteres
     stringPlate= g1 + "-"+  g2 + "-" + g3
-    print(stringPlate)
     createPlate(stringPlate)
+    print(stringPlate + " -- >" + str(p) + "%")
